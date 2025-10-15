@@ -22,11 +22,29 @@ Em vez de cada sistema precisar configurar conexões diretas e específicas, o s
 
 ## 🧩 Agentes MCP Planejados
 
-1. **🧱 Arquitetura de Dados** – Criação e validação de estruturas (tabelas, esquemas, relacionamentos).  
-2. **📊 Análise Ad Hoc e Métricas** – Geração automática de queries e KPIs a partir de prompts.  
-3. **🔐 Governança e Segurança** – Controle de acesso, anonimização e logs de auditoria.  
-4. **🧠 Ensino e Explicação** – Interpretação e documentação automática de consultas SQL.  
-5. **📈 Visualização e Insights** – Construção de gráficos e visualizações a partir de resultados SQL.  
+1. **🧱 Arquitetura de Dados**  
+   - Criação e validação de estruturas (tabelas, esquemas, relacionamentos).  
+   - Geração automática de diagramas ER e documentação das tabelas.  
+   - Verificação de normalização e dependências funcionais.
+
+2. **📊 Análise Ad Hoc e Métricas**  
+   - Interpretação de prompts em linguagem natural e conversão para SQL.  
+   - Criação de métricas e KPIs personalizados (ex: margem bruta, taxa de churn).  
+   - Armazenamento e reuso de consultas frequentes.  
+   - Identificação de tendências e anomalias nos resultados.  
+   - **Geração textual de insights e sugestões de visualização** (ex: “as vendas caíram 20% na região Sul”).  
+   - **Resumo automático dos resultados** com base em dados retornados.
+
+3. **🔐 Governança e Segurança**  
+   - Controle de acesso por schema, tabela ou coluna.  
+   - Anonimização e mascaramento de dados sensíveis.  
+   - Registro completo de logs e auditoria das consultas executadas.  
+   - Definição de políticas de acesso diretamente no manifesto MCP.
+
+4. **🧠 Ensino e Explicação**  
+   - Explicação em linguagem natural do que uma query faz.  
+   - Geração automática de documentação técnica do banco.  
+   - Sugestões de boas práticas em modelagem e SQL.
 
 ## 🧠 Valor Prático
 
