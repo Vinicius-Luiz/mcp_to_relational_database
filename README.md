@@ -35,13 +35,7 @@ Em vez de cada sistema precisar configurar conexões diretas e específicas, o s
    - **Geração textual de insights e sugestões de visualização** (ex: “as vendas caíram 20% na região Sul”).  
    - **Resumo automático dos resultados** com base em dados retornados.
 
-3. **🔐 Governança e Segurança**  
-   - Controle de acesso por schema, tabela ou coluna.  
-   - Anonimização e mascaramento de dados sensíveis.  
-   - Registro completo de logs e auditoria das consultas executadas.  
-   - Definição de políticas de acesso diretamente no manifesto MCP.
-
-4. **🧠 Ensino e Explicação**  
+3. **🧠 Ensino e Explicação**  
    - Explicação em linguagem natural do que uma query faz.  
    - Geração automática de documentação técnica do banco.  
    - Sugestões de boas práticas em modelagem e SQL.

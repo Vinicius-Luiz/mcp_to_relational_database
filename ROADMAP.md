@@ -5,16 +5,13 @@ Planejamento estruturado por fases, com entregáveis organizados por prioridade 
 ---
 
 ### **Fase 1 – Núcleo do MCP**
-- [ ] Criar estrutura base do **Server MCP**
-  - [ ] Implementar `manifest.json` com definição das ferramentas disponíveis  
-  - [ ] Configurar comunicação via WebSocket/HTTP  
-  - [ ] Estruturar padrão de agentes (nome, schema, input/output)  
-- [ ] Implementar **autenticação e controle de acesso**
-  - [ ] Suporte a API key  
-  - [ ] Definir permissões de execução por agente  
-- [ ] Criar **logs e auditoria básica**
-  - [ ] Registrar todas as requisições MCP (timestamp, usuário, ferramenta, status)  
-  - [ ] Persistir logs em banco relacional  
+- [x] Criar estrutura base do **Server MCP**
+  - [x] Implementar `manifest.json` com definição das ferramentas disponíveis  
+  - [x] Configurar comunicação via WebSocket/HTTP  
+  - [x] Estruturar padrão de agentes (nome, schema, input/output)  
+- [x] Criar **logs e auditoria básica**
+  - [x] Registrar todas as requisições MCP (timestamp, usuário, ferramenta, status)  
+  - [x] Persistir logs em banco relacional  
 
 ---
 
@@ -52,15 +49,6 @@ Planejamento estruturado por fases, com entregáveis organizados por prioridade 
 - [ ] Explicação automática de queries SQL  
 - [ ] Geração de documentação técnica dos bancos  
 - [ ] Sugestões de boas práticas de modelagem e escrita SQL  
-
----
-
-### **Fase 6 – Agente de Governança e Segurança**
-- [ ] Controle de permissões granular  
-  - [ ] Acesso por schema, tabela ou coluna  
-- [ ] Implementar mascaramento e anonimização de dados  
-- [ ] Gerar logs de auditoria detalhados  
-- [ ] Definir políticas de segurança no `manifest.json`  
 
 ---
 
