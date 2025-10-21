@@ -16,8 +16,8 @@ Planejamento estruturado por fases, com entregáveis organizados por prioridade 
 ---
 
 ### **Fase 2 – Integração com Bancos Relacionais**
-- [ ] Implementar camada de **conexão genérica** com múltiplos bancos  
-  - [ ] PostgreSQL  
+- [x] Implementar camada de **conexão genérica** com múltiplos bancos  
+  - [x] PostgreSQL  
   - [ ] MySQL  
   - [ ] SQL Server  
   - [ ] Oracle  

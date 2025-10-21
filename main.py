@@ -1,14 +1,18 @@
-from logs_manager import init_db, insert_log, get_logs
+from mcp_manager import init_db, insert_log, get_logs
 from fastapi.responses import JSONResponse
 from tools.document_schema import document_schema
+from classes.UserAuth import UserAuth
 from tools.analyze_query import analyze_query
 from tools.execute_query import execute_query
 from tools.get_schema import get_schema
 from tools.nl_to_sql import nl_to_sql
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, HTTPException
 import uvicorn
 import json
 import time
+
+# Sessão simples em memória (para exemplo, uma produção usaria JWT ou outro mecanismo mais robusto)
+SESSIONS = {}
 
 # ====== Carregar manifest.json ======
 with open("manifest.json", "r", encoding="utf-8") as f:
@@ -18,16 +22,10 @@ init_db()
 
 # ====== Inicializar servidor ======
 app = FastAPI(
-    title=manifest.get("name", "MCP Server"),
-    description=manifest.get(
-        "description",
-        "Servidor MCP para integração, análise e documentação de bancos de dados relacionais",
-    ),
-    version=manifest.get("version", "0.1.0"),
+    title=manifest.get("name"),
+    description=manifest.get("description"),
+    version=manifest.get("version"),
 )
-
-# ====== Logs em memória (placeholder para persistência futura) ======
-execution_logs = []
 
 
 # ====== Mapeamento das ferramentas ======
@@ -40,6 +38,7 @@ tool_functions = {
 }
 
 
+# ====== Endpoint para chamar ferramentas ======
 @app.post("/tools/{tool_name}")
 async def call_tool(tool_name: str, request: Request):
     if tool_name not in tool_functions:
@@ -51,13 +50,14 @@ async def call_tool(tool_name: str, request: Request):
     start_time = time.time()
     result = tool_functions[tool_name](data)
     elapsed = (time.time() - start_time) * 1000
-    log_entry = {
-        "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
-        "tool": tool_name,
-        "status": "success",
-        "execution_time": round(elapsed, 2),
-    }
-    insert_log(log_entry)
+    insert_log(
+        {
+            "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+            "tool": tool_name,
+            "status": "success",
+            "execution_time": round(elapsed, 2),
+        }
+    )
     return JSONResponse(content=result)
 
 
@@ -73,6 +73,50 @@ async def get_logs_endpoint():
     logs = get_logs()
     return {"logs": logs}
 
+
+@app.post("/login")
+async def login(request: Request):
+    data = await request.json()
+    api_mcp_key = data.get("api_mcp_key")
+    if not api_mcp_key:
+        raise HTTPException(status_code=422, detail="Chave ausente.")
+    user_id = UserAuth.login(api_mcp_key)
+    if user_id:
+        SESSIONS[api_mcp_key] = user_id
+        return {"message": "Login realizado com sucesso."}
+    else:
+        return JSONResponse(status_code=401, content={"erro": "API MCP Key inválida."})
+
+
+@app.post("/add_connection")
+async def add_connection(request: Request):
+    data = await request.json()
+    api_mcp_key = data.get("api_mcp_key")
+    dbms = data.get("dbms")
+    connection_string = data.get("connection_string")
+    if not api_mcp_key or not dbms or not connection_string:
+        raise HTTPException(status_code=422, detail="Campos obrigatórios ausentes.")
+    user_id = SESSIONS.get(api_mcp_key) or UserAuth.login(api_mcp_key)
+    if not user_id:
+        return JSONResponse(status_code=401, content={"erro": "Não autenticado."})
+    UserAuth.add_connection(user_id, dbms, connection_string)
+    return {"message": "Credencial adicionada com sucesso."}
+
+
+@app.post("/remove_connection")
+async def remove_connection(request: Request):
+    data = await request.json()
+    api_mcp_key = data.get("api_mcp_key")
+    dbms = data.get("dbms")
+    if not api_mcp_key or not dbms:
+        raise HTTPException(status_code=422, detail="Campos obrigatórios ausentes.")
+    user_id = SESSIONS.get(api_mcp_key) or UserAuth.login(api_mcp_key)
+    if not user_id:
+        return JSONResponse(status_code=401, content={"erro": "Não autenticado."})
+    UserAuth.remove_connection(user_id, dbms)
+    if api_mcp_key in SESSIONS:
+        del SESSIONS[api_mcp_key]
+    return {"message": "Conexão removida e usuário deslogado."}
 
 
 # ====== Inicialização ======

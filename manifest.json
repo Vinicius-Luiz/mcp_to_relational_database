@@ -203,6 +203,68 @@
             }
         }
     ],
+    "authentication": [
+        {
+            "name": "login",
+            "description": "Realiza login do usuário informando a api_mcp_key cadastrada.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "api_mcp_key": {
+                        "type": "string",
+                        "description": "Chave de autenticação do usuário."
+                    }
+                },
+                "required": ["api_mcp_key"]
+            },
+            "output_schema": {
+                "type": "object",
+                "properties": {
+                    "message": {"type": "string"},
+                    "erro": {"type": "string"}
+                }
+            }
+        },
+        {
+            "name": "add_connection",
+            "description": "Adiciona/vincula uma connection string a um DBMS informado para uso do usuário autenticado.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "api_mcp_key": {"type": "string"},
+                    "dbms": {"type": "string", "description": "Tipo de banco de dados (ex: postgresql, mysql, sqlserver)"},
+                    "connection_string": {"type": "string", "description": "String de conexão para o banco"}
+                },
+                "required": ["api_mcp_key", "dbms", "connection_string"]
+            },
+            "output_schema": {
+                "type": "object",
+                "properties": {
+                    "message": {"type": "string"},
+                    "erro": {"type": "string"}
+                }
+            }
+        },
+        {
+            "name": "remove_connection",
+            "description": "Remove a conexão de um determinado banco (dbms) e faz o logout do usuário.",
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "api_mcp_key": {"type": "string"},
+                    "dbms": {"type": "string"}
+                },
+                "required": ["api_mcp_key", "dbms"]
+            },
+            "output_schema": {
+                "type": "object",
+                "properties": {
+                    "message": {"type": "string"},
+                    "erro": {"type": "string"}
+                }
+            }
+        }
+    ],
     "logging": {
         "enabled": true,
         "persistence": "database",
