@@ -1,279 +1,78 @@
 {
-    "name": "mcp-relational-database-server",
-    "version": "0.1.0",
-    "description": "Servidor MCP para integração, análise e documentação de bancos de dados relacionais.",
-    "author": "Vinícius Luiz - viniciusluiz14052000@gmail.com",
-    "license": "Apache",
-    "tools": [
-        {
-            "name": "execute_query",
-            "description": "Executa uma consulta SQL em um banco de dados conectado.",
-            "input_schema": {
-                "type": "object",
-                "properties": {
-                    "connection": {
-                        "type": "string",
-                        "description": "Nome ou alias da conexão (PostgreSQL, MySQL, SQLServer, Oracle)"
-                    },
-                    "query": {
-                        "type": "string",
-                        "description": "Consulta SQL a ser executada"
-                    }
-                },
-                "required": [
-                    "connection",
-                    "query"
-                ]
-            },
-            "output_schema": {
-                "type": "object",
-                "properties": {
-                    "rows": {
-                        "type": "array",
-                        "items": {
-                            "type": "object"
-                        }
-                    },
-                    "row_count": {
-                        "type": "integer"
-                    },
-                    "execution_time_ms": {
-                        "type": "number"
-                    }
-                }
-            }
+  "environment": {
+    "fastmcp": "2.13.1",
+    "mcp": "1.22.0"
+  },
+  "serverInfo": {
+    "name": "Wikipedia Server",
+    "title": null,
+    "version": "2.13.1",
+    "websiteUrl": null,
+    "icons": null
+  },
+  "capabilities": {},
+  "tools": [
+    {
+      "name": "buscar_wikipedia",
+      "title": null,
+      "description": "Busca um resumo no Wikipedia com base no termo fornecido.\nRetorna t�tulo, resumo e URL.",
+      "inputSchema": {
+        "properties": {
+          "termo": {
+            "type": "string"
+          }
         },
-        {
-            "name": "get_schema",
-            "description": "Obtém estrutura de tabelas, colunas e relacionamentos do banco conectado.",
-            "input_schema": {
-                "type": "object",
-                "properties": {
-                    "connection": {
-                        "type": "string"
-                    },
-                    "include_relations": {
-                        "type": "boolean",
-                        "default": true
-                    }
-                },
-                "required": [
-                    "connection"
-                ]
-            },
-            "output_schema": {
-                "type": "object",
-                "properties": {
-                    "tables": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "table_name": {
-                                    "type": "string"
-                                },
-                                "columns": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "name": {
-                                                "type": "string"
-                                            },
-                                            "type": {
-                                                "type": "string"
-                                            },
-                                            "nullable": {
-                                                "type": "boolean"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        {
-            "name": "analyze_query",
-            "description": "Analisa performance e segurança de uma query SQL.",
-            "input_schema": {
-                "type": "object",
-                "properties": {
-                    "query": {
-                        "type": "string"
-                    },
-                    "connection": {
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "query",
-                    "connection"
-                ]
-            },
-            "output_schema": {
-                "type": "object",
-                "properties": {
-                    "analysis": {
-                        "type": "string"
-                    },
-                    "risk_level": {
-                        "type": "string",
-                        "enum": [
-                            "low",
-                            "medium",
-                            "high"
-                        ]
-                    },
-                    "recommendations": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        {
-            "name": "nl_to_sql",
-            "description": "Converte uma pergunta em linguagem natural em uma query SQL válida.",
-            "input_schema": {
-                "type": "object",
-                "properties": {
-                    "question": {
-                        "type": "string"
-                    },
-                    "connection": {
-                        "type": "string"
-                    },
-                    "context_schema": {
-                        "type": "array",
-                        "description": "Esquema de tabelas e colunas do banco, usado como contexto"
-                    }
-                },
-                "required": [
-                    "question"
-                ]
-            },
-            "output_schema": {
-                "type": "object",
-                "properties": {
-                    "query": {
-                        "type": "string"
-                    },
-                    "confidence": {
-                        "type": "number",
-                        "minimum": 0,
-                        "maximum": 1
-                    }
-                }
-            }
-        },
-        {
-            "name": "document_schema",
-            "description": "Gera documentação técnica das tabelas e colunas de um banco.",
-            "input_schema": {
-                "type": "object",
-                "properties": {
-                    "connection": {
-                        "type": "string"
-                    },
-                    "output_format": {
-                        "type": "string",
-                        "enum": [
-                            "markdown",
-                            "json"
-                        ],
-                        "default": "markdown"
-                    }
-                },
-                "required": [
-                    "connection"
-                ]
-            },
-            "output_schema": {
-                "type": "object",
-                "properties": {
-                    "documentation": {
-                        "type": "string"
-                    }
-                }
-            }
+        "required": [
+          "termo"
+        ],
+        "type": "object"
+      },
+      "outputSchema": null,
+      "icons": null,
+      "annotations": null,
+      "_meta": {
+        "_fastmcp": {
+          "tags": []
         }
-    ],
-    "authentication": [
-        {
-            "name": "login",
-            "description": "Realiza login do usuário informando a api_mcp_key cadastrada.",
-            "input_schema": {
-                "type": "object",
-                "properties": {
-                    "api_mcp_key": {
-                        "type": "string",
-                        "description": "Chave de autenticação do usuário."
-                    }
-                },
-                "required": ["api_mcp_key"]
-            },
-            "output_schema": {
-                "type": "object",
-                "properties": {
-                    "message": {"type": "string"},
-                    "erro": {"type": "string"}
-                }
-            }
+      }
+    },
+    {
+      "name": "contar_palavras",
+      "title": null,
+      "description": "Conta o n�mero de palavras no texto fornecido.",
+      "inputSchema": {
+        "properties": {
+          "resumo": {
+            "type": "string"
+          }
         },
-        {
-            "name": "add_connection",
-            "description": "Adiciona/vincula uma connection string a um DBMS informado para uso do usuário autenticado.",
-            "input_schema": {
-                "type": "object",
-                "properties": {
-                    "api_mcp_key": {"type": "string"},
-                    "dbms": {"type": "string", "description": "Tipo de banco de dados (ex: postgresql, mysql, sqlserver)"},
-                    "connection_string": {"type": "string", "description": "String de conexão para o banco"}
-                },
-                "required": ["api_mcp_key", "dbms", "connection_string"]
-            },
-            "output_schema": {
-                "type": "object",
-                "properties": {
-                    "message": {"type": "string"},
-                    "erro": {"type": "string"}
-                }
-            }
+        "required": [
+          "resumo"
+        ],
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "type": "integer"
+          }
         },
-        {
-            "name": "remove_connection",
-            "description": "Remove a conexão de um determinado banco (dbms) e faz o logout do usuário.",
-            "input_schema": {
-                "type": "object",
-                "properties": {
-                    "api_mcp_key": {"type": "string"},
-                    "dbms": {"type": "string"}
-                },
-                "required": ["api_mcp_key", "dbms"]
-            },
-            "output_schema": {
-                "type": "object",
-                "properties": {
-                    "message": {"type": "string"},
-                    "erro": {"type": "string"}
-                }
-            }
+        "required": [
+          "result"
+        ],
+        "type": "object",
+        "x-fastmcp-wrap-result": true
+      },
+      "icons": null,
+      "annotations": null,
+      "_meta": {
+        "_fastmcp": {
+          "tags": []
         }
-    ],
-    "logging": {
-        "enabled": true,
-        "persistence": "database",
-        "fields": [
-            "timestamp",
-            "user",
-            "tool",
-            "status",
-            "execution_time"
-        ]
+      }
     }
+  ],
+  "prompts": [],
+  "resources": [],
+  "resourceTemplates": []
 }
