@@ -1,6 +1,6 @@
 from typing import Dict, Any
 
-def get_schema(data: Dict[str, Any]) -> Dict[str, Any]:
+def tool_get_schema(data: Dict[str, Any]) -> Dict[str, Any]:
     return {
         "tables": [
             {

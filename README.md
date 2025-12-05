@@ -6,38 +6,38 @@ A proposta é criar uma **camada universal de acesso e controle**, permitindo qu
 ## 💡 Ideia-base
 
 O MCP atua como intermediário entre o modelo de linguagem e os bancos de dados.  
-Em vez de cada sistema precisar configurar conexões diretas e específicas, o servidor MCP oferece um **endpoint único** que centraliza o acesso e as permissões.
+Em vez de cada sistema precisar configurar conexões diretas e específicas, o servidor MCP oferece um **endpoint único** que centraliza o acesso.
 
 ## 🎯 Objetivos Principais
 
 - Permitir que **usuários não técnicos** consultem dados usando linguagem natural.  
 - **Centralizar o acesso** a múltiplos bancos de dados sob um único servidor MCP.  
 - Facilitar a **governança de dados**, com logs, permissões e rastreabilidade.  
-- **Reduzir riscos de acesso indevido**, delegando ao MCP a decisão sobre o que pode ser executado.
 
 ## ⚙️ Componentes
 
 - **Server MCP:** expõe as ferramentas de consulta, análise e governança sobre os bancos de dados.  
 - **Client MCP:** modelo de linguagem ou agente que realiza as solicitações em linguagem natural, convertidas em comandos estruturados.  
 
+Neste projeto, iremos desenvolver o Server MCP. o Client MCP será os chats que possuem integração com MCPs.
+
 ## 🧩 Agentes MCP Planejados
 
 1. **🧱 Arquitetura de Dados**  
    - Criação e validação de estruturas (tabelas, esquemas, relacionamentos).  
-   - Geração automática de diagramas ER e documentação das tabelas.  
+   - Geração de diagramas ER e documentação das tabelas.  
    - Verificação de normalização e dependências funcionais.
 
 2. **📊 Análise Ad Hoc e Métricas**  
    - Interpretação de prompts em linguagem natural e conversão para SQL.  
-   - Criação de métricas e KPIs personalizados (ex: margem bruta, taxa de churn).  
-   - Armazenamento e reuso de consultas frequentes.  
+   - Criação de métricas e KPIs (ex: margem bruta, taxa de churn).  
+   - ~~Armazenamento e reuso de consultas frequentes.~~
    - Identificação de tendências e anomalias nos resultados.  
-   - **Geração textual de insights e sugestões de visualização** (ex: “as vendas caíram 20% na região Sul”).  
-   - **Resumo automático dos resultados** com base em dados retornados.
+   - Geração textual de insights e sugestões de visualização.
+   - Resumo automático dos resultados.
 
 3. **🧠 Ensino e Explicação**  
    - Explicação em linguagem natural do que uma query faz.  
-   - Geração automática de documentação técnica do banco.  
    - Sugestões de boas práticas em modelagem e SQL.
 
 ## 🧠 Valor Prático

@@ -11,7 +11,7 @@ def get_db_connection(dbms: str, connection_string: str):
             raise NotImplementedError(f"DBMS '{dbms}' não suportado ainda.")
 
 
-def execute_query(data):
+def tool_execute_query(data):
     start_time = time.time()
     try:
         connection_string = data.get("connection")
@@ -32,9 +32,9 @@ def execute_query(data):
                 "execution_time_ms": 0,
                 "error": f"DBMS '{dbms}' não suportado ainda.",
             }
-        db.conectar()
-        result_rows = db.executar_query(query)
-        db.fechar()
+        db.connect()
+        result_rows = db.execute_query(query)
+        db.close()
         elapsed = (time.time() - start_time) * 1000
         return {
             "rows": result_rows,

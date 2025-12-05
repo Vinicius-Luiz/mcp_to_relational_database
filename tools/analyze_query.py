@@ -1,6 +1,6 @@
 from typing import Dict, Any
 
-def analyze_query(data: Dict[str, Any]) -> Dict[str, Any]:
+def tool_analyze_query(data: Dict[str, Any]) -> Dict[str, Any]:
     return {
         "analysis": "A consulta parece eficiente.",
         "risk_level": "low",

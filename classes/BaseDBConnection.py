@@ -6,13 +6,13 @@ class BaseDBConnection(ABC):
     """
 
     @abstractmethod
-    def conectar(self):
+    def connect(self):
         pass
 
     @abstractmethod
-    def executar_query(self, query):
+    def execute_query(self, query):
         pass
 
     @abstractmethod
-    def fechar(self):
+    def close(self):
         pass

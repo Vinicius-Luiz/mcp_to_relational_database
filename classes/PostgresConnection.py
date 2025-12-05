@@ -7,15 +7,15 @@ class PostgresConnection(BaseDBConnection):
         self.connection_string = connection_string
         self.conn = None
 
-    def conectar(self):
+    def connect(self):
         self.conn = psycopg2.connect(self.connection_string)
 
-    def executar_query(self, query):
+    def execute_query(self, query):
         cursor = self.conn.cursor()
         cursor.execute(query)
         dados = cursor.fetchall()
         return dados
 
-    def fechar(self):
+    def close(self):
         if self.conn:
             self.conn.close()
