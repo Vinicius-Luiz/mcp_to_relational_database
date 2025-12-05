@@ -1,4 +1,4 @@
-from classes.BaseDBConnection import BaseDBConnection
+from classes.Connection.BaseDBConnection import BaseDBConnection
 import psycopg2
 
 

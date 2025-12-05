@@ -1,5 +1,5 @@
-from classes.PostgresConnection import PostgresConnection
-from classes.Type import DBMS
+from classes.Connection.PostgresConnection import PostgresConnection
+from classes.MCPUtils.Type import DBMS
 import time
 
 

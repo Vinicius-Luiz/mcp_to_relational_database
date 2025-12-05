@@ -15,16 +15,13 @@
 ## **Fase 1.1 – Logs, Auditoria e Governança**
 > Observabilidade e rastreabilidade, conforme descrito no README.
 
-- [ ] Criar módulo de logs
-- [ ] Criar tabela de auditoria (`logs_mcp`)
-- [ ] Registrar logs em cada tool MCP
-  - [ ] timestamp  
-  - [ ] usuário  
-  - [ ] tool executada  
-  - [ ] status  
-- [ ] ~~Implementar camada simples de permissões~~
-  - [ ] ~~Lista de ferramentas habilitadas por usuário/tipo~~  
-  - [ ] ~~Negação detalhada em caso de tentativa não autorizada~~
+- [x] Criar módulo de logs
+- [x] Criar tabela de auditoria (`logs_mcp`)
+- [x] Registrar logs em cada tool MCP
+  - [x] timestamp  
+  - [x] token credential  
+  - [x] tool executada  
+  - [x] status  
 
 ---
 
