@@ -28,17 +28,24 @@
 ## **Fase 2 – Integração com Bancos Relacionais**
 > Centralizar o acesso aos bancos — objetivo principal descrito no README.
 
-- [ ] Criar módulo `connection_manager`
-- [ ] Implementar conexões individuais:
-  - [ ] PostgreSQL  
+- [x] Criar módulo `BaseDBConnection`
+- [-] Implementar conexões individuais:
+  - [x] PostgreSQL  
   - [ ] MySQL  
-  - [ ] SQL Server  
+  - [ ] SQL Server
   - [ ] Oracle  
-- [ ] Criar tools MCP:
-  - [ ] `execute_query`
-  - [ ] `get_tables`
-  - [ ] `get_metadata`
+- [x] Criar tools MCP:
+  - [x] `analyze_query`
+  - [x] `execute_query`
+  - [x] `document_schema`
+  - [x] `get_schema`
+  - [x] `nl_to_sql`
 - [ ] Definir padrão de resposta JSON  
+  - [ ] `analyze_query`
+  - [ ] `execute_query`
+  - [ ] `document_schema`
+  - [ ] `get_schema`
+  - [ ] `nl_to_sql`
 - [ ] Configurar pools e credenciais seguras  
 
 ---

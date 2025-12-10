@@ -30,8 +30,6 @@ erDiagram
     USERS ||--o{ ORDERS : "possui"
 ````
 
-````
-
 ✔ Fácil de pré-visualizar  
 ✔ Pode ser exportado para imagem  
 ✔ Simples de gerar a partir do schema  
@@ -104,8 +102,6 @@ erDiagram
 
 (tabelas em Markdown como acima)
 
-````
-
 ---
 
 # ✅ **4. Alternativas mais ricas (se quiser elevar o nível)**
@@ -143,8 +139,7 @@ Sugestão de **estrutura padrão de retorno**:
 {
   "diagram": "<mermaid_here>",
   "documentation_markdown": "<md_here>",
-  "summary": "<texto breve>",
-  "metadata": { ... }
+  "documentation_json": "<json_here>"
 }
 ```
 
@@ -159,7 +154,6 @@ Para um MCP de banco de dados que gera diagramas e documentação:
 | Diagrama ER              | **Mermaid**          | Visual, leve, universal                         |
 | Documentação             | **Markdown**         | Legível, versionável                            |
 | Estrutura completa       | **JSON opcional**    | Permite renderização avançada                   |
-| Entrega final ao usuário | **Markdown híbrido** | Combina visual + explicação + detalhes técnicos |
 
 ---
 

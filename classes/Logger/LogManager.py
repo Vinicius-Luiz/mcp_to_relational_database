@@ -34,16 +34,15 @@ class LogManager:
     # ================================
     # CONSTRUTOR
     # ================================
-    def __init__(self, db_path: Optional[str] = None):
+    def __init__(self):
         """
         Inicializa o LogManager.
-
-        Args:
-            db_path: caminho para o arquivo sqlite. Se None, usa a variável de ambiente DB_PATH.
         """
-        self.db_path = db_path or os.getenv("DB_PATH")
+        self.db_path = os.getenv("LOGGER_DB_PATH")
         if not self.db_path:
-            raise ValueError("DB_PATH não definido — passe db_path ou defina a variável de ambiente DB_PATH.")
+            raise ValueError(
+                "DB_PATH não definido — passe db_path ou defina a variável de ambiente DB_PATH."
+            )
         self._init_db()
 
     # ================================
@@ -68,7 +67,9 @@ class LogManager:
         cursor.execute(
             self.SQL_INSERT_LOG,
             (
-                log_entry.get("timestamp", datetime.now().strftime("%Y-%m-%d %H:%M:%S")),
+                log_entry.get(
+                    "timestamp", datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                ),
                 log_entry.get("usuario", "anonymous"),
                 log_entry.get("tool", "unknown"),
                 log_entry.get("status", "unknown"),
@@ -104,7 +105,13 @@ class LogManager:
     # ================================
     # Helper para registrar execução de tool
     # ================================
-    def log_tool_execution(self, tool_name: str, status: str, execution_time: float, usuario: str = "anonymous") -> None:
+    def log_tool_execution(
+        self,
+        tool_name: str,
+        status: str,
+        execution_time: float,
+        usuario: str = "anonymous",
+    ) -> None:
         """
         Função auxiliar para registrar a execução de uma ferramenta MCP.
 
@@ -114,13 +121,15 @@ class LogManager:
             execution_time: Tempo de execução em segundos
             usuario: Usuário que executou a ferramenta (padrão: "anonymous")
         """
-        self.insert_log({
-            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "usuario": usuario,
-            "tool": tool_name,
-            "status": status,
-            "execution_time": execution_time,
-        })
+        self.insert_log(
+            {
+                "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                "usuario": usuario,
+                "tool": tool_name,
+                "status": status,
+                "execution_time": execution_time,
+            }
+        )
 
 
 # ================================

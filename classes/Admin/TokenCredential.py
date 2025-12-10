@@ -1,7 +1,11 @@
 import sqlite3
 import uuid
 import json
+import os
 from datetime import datetime
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 class TokenCredential:
@@ -30,8 +34,10 @@ class TokenCredential:
     WHERE token = ?
     """
 
-    def __init__(self, db_path="credentials.db"):
-        self.db_path = db_path
+    def __init__(
+        self,
+    ):
+        self.db_path = os.getenv("CREDENTIALS_DB_PATH")
         self._create_table()
 
     def _create_table(self):

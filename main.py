@@ -9,7 +9,6 @@ import time
 
 mcp = FastMCP("MCP para Bancos de Dados Relacionais")
 
-# instancia o gerenciador de logs (cria o DB/tabela se necessário)
 lm = LogManager()
 
 
@@ -50,10 +49,10 @@ def analyze_query_tool(data):
 
 
 @mcp.tool("execute_query")
-def execute_query_tool(data):
+def execute_query_tool(credential_token: str, sql_query: str):
     start_time = time.time()
     try:
-        response = tool_execute_query(data)
+        response = tool_execute_query(credential_token, sql_query)
     except Exception as e:
         raise
     finally:
